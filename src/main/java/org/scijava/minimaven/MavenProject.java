@@ -542,8 +542,8 @@ public class MavenProject implements Comparable<MavenProject> {
 
 		final File pom = new File(directory, "pom.xml");
 		if (pom.exists()) {
-			final File targetFile = new File(target, "META-INF/maven/" +
-				coordinate.groupId + "/" + coordinate.artifactId + "/pom.xml");
+			String path="META-INF/maven/" + coordinate.groupId + "/" + coordinate.artifactId + "/pom.xml";
+			final File targetFile = new File(target, path.replace("\n", "").replace(" ", ""));
 			targetFile.getParentFile().mkdirs();
 			BuildEnvironment.copyFile(pom, targetFile);
 		}

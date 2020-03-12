@@ -79,7 +79,8 @@ public class Coordinate {
 	}
 
 	public String normalize(final String s) {
-		return "".equals(s) ? null : s;
+		if(s==null || "".equals(s)) return null;
+		return s.replace("\n", "").replace(" ", "");
 	}
 
 	public String getJarName() {
@@ -107,9 +108,9 @@ public class Coordinate {
 	public String getFileName(final boolean withProjectPrefix,
 		final boolean withClassifier, final String fileExtension)
 	{
-		return (withProjectPrefix ? groupId + "/" : "") + artifactId + "-" +
+		return ((withProjectPrefix ? groupId + "/" : "") + artifactId + "-" +
 			getVersion() + (withClassifier && classifier != null ? "-" + classifier
-				: "") + (fileExtension != null ? "." + fileExtension : "");
+				: "") + (fileExtension != null ? "." + fileExtension : "")).replace("\n", "").replace(" ", "");
 	}
 
 	public String getKey() {
